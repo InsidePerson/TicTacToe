@@ -27,18 +27,23 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         button.className = 'tictactoebutton';
 
-        button.innerHTML = '&nbsp;'; 
+        button.innerHTML = '&nbsp;';
 
-        button.addEventListener('click', function(){
+        button.addEventListener('click', function () {
 
-            if (playerTurnIs === 1){
+            if (playerTurnIs === 1) {
+
                 this.innerHTML = 'X';
+
                 playerTurnIs = 2;
-            }else{
+
+            } else {
+
                 this.innerHTML = 'O';
+
                 playerTurnIs = 1;
             }
-          
+
         });
 
         boardName.appendChild(button);
