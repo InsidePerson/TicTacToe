@@ -1,5 +1,10 @@
 .title {
-    color: magenta;
+    color: background-image: -webkit-gradient(linear, left top, left bottom, from(red), to(darkred));
+    background-image: -webkit-linear-gradient(top, red, darkred);
+    background-image: -moz-linear-gradient(top, red, darkred);
+    background-image: linear-gradient(to bottom, red, darkred);;
+    text-align: center;
+    font-size: 50px;
 }
 
 .board {
@@ -17,4 +22,21 @@
     font-size: 30px;
     text-align: center;
     font-family: 'Times New Roman';
+}
+
+.body {
+    background-color: lightslategray;
+    text-align: center;
+}
+
+.button {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(lightgrey), to(blue));
+    background-image: -webkit-linear-gradient(top, lightgrey, blue);
+    background-image: -moz-linear-gradient(top, lightgrey, blue);
+    background-image: linear-gradient(to bottom, lightgrey, blue);
+    height: 45px;
+    width: 200px;
+    font-size: 25px;
+    font-family: Times;
+    font-weight: bold;
 }
