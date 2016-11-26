@@ -63,6 +63,16 @@
 
          weHaveAWinner = calculateTicTacToeWinner();
 
+         if (weHaveAWinner) {
+
+             setTimeout(function () {
+
+                 window.alert('We have a WINNER!');
+
+             }, 0);
+
+         }
+
      });
 
  }
@@ -77,15 +87,20 @@
 
  function resetTicTacToeBoard() {
 
-     while (board.hasChildNodes()) {
+     var response = window.confirm('ARE YOU SURE ABOUT THAT?')
 
-         board.removeChild(board.lastChild);
+     if (response) {
+
+         while (board.hasChildNodes()) {
+
+             board.removeChild(board.lastChild);
+         }
+
+         paintTicTacToeBoard();
+
+         paintPlayerTurn(1);
+
      }
-
-     paintTicTacToeBoard();
-
-     paintPlayerTurn(1);
-
  }
 
  function calculateTicTacToeWinner() {
