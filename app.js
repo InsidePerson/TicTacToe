@@ -2,7 +2,7 @@
  var board = document.querySelector('#tictactoe');
  var playerTurnIs = 1;
  var playerTurnSpan = document.querySelector('#playerTurn');
-
+ var weHaveAWinner = false;
 
  document.addEventListener("DOMContentLoaded", function (event) {
 
@@ -17,7 +17,7 @@
 
          if (i % 3 !== 0) {
 
-             createTicTacToeButton(board);
+             createTicTacToeButton(i);
 
          } else {
 
@@ -25,36 +25,43 @@
 
              board.appendChild(br);
 
-             createTicTacToeButton(board);
+             createTicTacToeButton(i);
          }
      }
 
  }
 
- function createTicTacToeButton(boardName) {
+ function createTicTacToeButton(index) {
 
      var button = document.createElement("button");
+
+     button.id = 'tttb_' + index.toString();
 
      button.className = 'tictactoebutton';
 
      button.innerHTML = '&nbsp;';
 
-     boardName.appendChild(button);
+     board.appendChild(button);
 
      button.addEventListener('click', function () {
 
-         if (playerTurnIs === 1 && this.innerHTML === '&nbsp;') {
+         if (!weHaveAWinner) {
 
-             this.innerHTML = 'X';
+             if (playerTurnIs === 1 && this.innerHTML === '&nbsp;') {
 
-             paintPlayerTurn(2);
+                 this.innerHTML = 'X';
 
-         } else if (this.innerHTML === '&nbsp;') {
+                 paintPlayerTurn(2);
 
-             this.innerHTML = 'O';
+             } else if (this.innerHTML === '&nbsp;') {
 
-             paintPlayerTurn(1);
+                 this.innerHTML = 'O';
+
+                 paintPlayerTurn(1);
+             }
          }
+
+         weHaveAWinner = calculateTicTacToeWinner();
 
      });
 
@@ -79,4 +86,47 @@
 
      paintPlayerTurn(1);
 
+ }
+
+ function calculateTicTacToeWinner() {
+
+     var result = false;
+     var buttonPrefix = '#tttb_';
+     var wins = [
+         [0, 1, 2],
+         [3, 4, 5],
+         [6, 7, 8],
+         [0, 3, 6],
+         [1, 4, 7],
+         [2, 5, 8],
+         [0, 4, 8],
+         [2, 4, 6]
+     ];
+
+     wins.forEach(function (winRow) {
+
+         var b1 = board.querySelector(buttonPrefix + winRow[0]).innerHTML === '&nbsp;' ?
+             (buttonPrefix + winRow[0]) :
+             board.querySelector(buttonPrefix + (winRow[0])).innerHTML;
+         var b2 = board.querySelector(buttonPrefix + winRow[1]).innerHTML === '&nbsp;' ?
+             (buttonPrefix + winRow[1]) :
+             board.querySelector(buttonPrefix + (winRow[1])).innerHTML;
+         var b3 = board.querySelector(buttonPrefix + winRow[2]).innerHTML === '&nbsp;' ?
+             (buttonPrefix + winRow[2]) :
+             board.querySelector(buttonPrefix + (winRow[2])).innerHTML;
+
+         if ((b1 === b2) && (b2 === b3)) {
+
+             result = true;
+
+             board.querySelector(buttonPrefix + winRow[0]).style.color = 'red';
+             board.querySelector(buttonPrefix + winRow[1]).style.color = 'red';
+             board.querySelector(buttonPrefix + winRow[2]).style.color = 'red';
+
+         }
+
+
+     });
+
+     return result;
  }
