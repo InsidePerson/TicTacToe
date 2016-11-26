@@ -59,9 +59,8 @@
 
                  paintPlayerTurn(1);
              }
-         }
 
-         weHaveAWinner = calculateTicTacToeWinner();
+  weHaveAWinner = calculateTicTacToeWinner();
 
          if (weHaveAWinner) {
 
@@ -70,6 +69,8 @@
                  window.alert('We have a WINNER!');
 
              }, 0);
+
+         }
 
          }
 
@@ -99,6 +100,8 @@
          paintTicTacToeBoard();
 
          paintPlayerTurn(1);
+
+         weHaveAWinner = false;
 
      }
  }
