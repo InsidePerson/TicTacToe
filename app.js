@@ -1,52 +1,82 @@
-document.addEventListener("DOMContentLoaded", function (event) {
+ var body = document.querySelector('body');
+ var board = document.querySelector('#tictactoe');
+ var playerTurnIs = 1;
+ var playerTurnSpan = document.querySelector('#playerTurn');
 
-    var board = document.querySelector('#tictactoe');
-    var playerTurnIs = 1;
 
-    for (var i = 0; i < 9; i++) {
+ document.addEventListener("DOMContentLoaded", function (event) {
 
-        if (i % 3 !== 0) {
+     paintTicTacToeBoard();
 
-            createTicTacToeButton(board);
+ });
 
-        } else {
 
-            var br = document.createElement("br");
+ function paintTicTacToeBoard() {
 
-            board.appendChild(br);
+     for (var i = 0; i < 9; i++) {
 
-            createTicTacToeButton(board);
+         if (i % 3 !== 0) {
 
-        }
+             createTicTacToeButton(board);
 
-    }
+         } else {
 
-    function createTicTacToeButton(boardName) {
+             var br = document.createElement("br");
 
-        var button = document.createElement("button");
+             board.appendChild(br);
 
-        button.className = 'tictactoebutton';
+             createTicTacToeButton(board);
+         }
+     }
 
-        button.innerHTML = '&nbsp;';
+ }
 
-        button.addEventListener('click', function () {
+ function createTicTacToeButton(boardName) {
 
-            if (playerTurnIs === 1) {
+     var button = document.createElement("button");
 
-                this.innerHTML = 'X';
+     button.className = 'tictactoebutton';
 
-                playerTurnIs = 2;
+     button.innerHTML = '&nbsp;';
 
-            } else {
+     boardName.appendChild(button);
 
-                this.innerHTML = 'O';
+     button.addEventListener('click', function () {
 
-                playerTurnIs = 1;
-            }
+         if (playerTurnIs === 1 && this.innerHTML === '&nbsp;') {
 
-        });
+             this.innerHTML = 'X';
 
-        boardName.appendChild(button);
+             paintPlayerTurn(2);
 
-    }
-});
+         } else if (this.innerHTML === '&nbsp;') {
+
+             this.innerHTML = 'O';
+
+             paintPlayerTurn(1);
+         }
+
+     });
+
+ }
+
+ function paintPlayerTurn(player) {
+
+     playerTurnIs = player;
+
+     playerTurnSpan.innerHTML = player;
+
+ }
+
+ function resetTicTacToeBoard() {
+
+     while (board.hasChildNodes()) {
+
+         board.removeChild(board.lastChild);
+     }
+
+     paintTicTacToeBoard();
+
+     paintPlayerTurn(1);
+
+ }
